@@ -1,4 +1,5 @@
 #INSTALL GIT
+#update this line if you are not using apt-get
 sudo apt-get update && sudo apt-get -y install git 
 
 #INSTALL DEPOT TOOLS
@@ -23,6 +24,8 @@ git checkout master
 #To generate ninja project files for a Release build instead:
 
 #DEFAULT DEBUG BUILD
+#to generate qt creator project files use this command instead
+#gn gen --ide ="qtcreator" out/Debug 
 gn gen out/Debug
 
 #OPTIONAL RELEASE BUILD
