@@ -1,6 +1,6 @@
 #INSTALL GIT
-#update this line if you are not using apt-get
-sudo apt-get update && sudo apt-get -y install git 
+sudo apt-get -y install git 
+sudo yum -y install git
 
 #INSTALL DEPOT TOOLS
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
