@@ -73,7 +73,7 @@ git checkout master
 #DEFAULT DEBUG BUILD
 #gn gen out/Debug
 #generate optional qt creator project files
-gn gen out/Debug --ide="qtcreator" 
+gn gen out/Debug
 
 #OPTIONAL RELEASE BUILD
 #gn gen out/Release --args='is_debug=false'
