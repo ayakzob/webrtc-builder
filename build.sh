@@ -73,11 +73,11 @@ git checkout master
 #DEFAULT DEBUG BUILD
 #gn gen out/Debug
 #generate optional qt creator project files
-gn gen --ide ="qtcreator" out/Debug 
+gn gen out/Debug --ide ="qtcreator" 
 
 #OPTIONAL RELEASE BUILD
 #gn gen out/Release --args='is_debug=false'
-#gn gen --ide ="qtcreator" out/Release --args='is_debug=false'
+#gn gen out/Release --args='is_debug=false' --ide ="qtcreator" 
 
 #THIS IS THE COMMAND TO CLEAN THE BUILD
 #To clean all build artifacts in a directory but leave the current GN configuration untouched (stored in the args.gn file), do:
