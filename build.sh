@@ -12,9 +12,8 @@ echo "LINUX_MAJOR_VERSION_ID=$LINUX_MAJOR_VERSION_ID"
 #UBUNTU
 if [ "$LINUX_ID" = "ubuntu" ]; then 
 	sudo apt-get update
-	sudo apt-get -y install git lbzip2
-
-	#install , UBUNTU seems to need this
+	sudo apt-get -y install git
+	sudo apt-get -y install lbzip2
 	sudo apt-get install -y gtk2.0
 
 	#PYTHON2.7 
@@ -89,7 +88,7 @@ if [ "$LINUX_ID" = "sles" ]; then
 		cd Python-2.7.3
 		./configure
 		make
-		sudo make install
+		sudo make altinstall
 		cd ..
 	fi
 fi;
