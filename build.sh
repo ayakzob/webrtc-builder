@@ -119,7 +119,7 @@ if [ "$LINUX_ID" = "sles" ]; then
 		cd Python-2.7.3
 		./configure
 		make
-		sudo make altinstall
+		sudo make install
 		cd ..
 	fi
 fi;
