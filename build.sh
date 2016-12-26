@@ -101,6 +101,12 @@ if [ "$LINUX_ID" = "sles" ]; then
 	if which python2.7 >/dev/null; then
 		echo "python2.7 exists"
 	else
+		#update ca certificates (https://github.com/openSUSE/ca-certificates)
+		git clone https://github.com/openSUSE/ca-certificates.git
+		cd ca-certificates
+		sudo make install
+		cd ..
+		
 		echo "Installing python 2.7"
 		sudo zypper --non-interactive install gcc gcc-c++
 		sudo zypper --non-interactive install openssl-devel
