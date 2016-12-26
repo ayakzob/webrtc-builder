@@ -30,6 +30,28 @@ fi;
 
 
 
+#UBUNTU
+if [ "$LINUX_ID" = "amzn" ]; then 
+	sudo yum check-update
+	sudo yum -y install git
+
+	#LBZIP2
+	if which lbzip2 >/dev/null; then
+		echo "lbzip2 exists (http://lbzip2.org/download)"
+	else
+		echo "Installing lbzip2 (http://lbzip2.org/download)"
+		sudo yum -y  groupinstall 'Development Tools'
+		curl -O http://archive.lbzip2.org/lbzip2-2.5.tar.gz
+		tar -xvzf lbzip2-2.5.tar.gz
+		cd lbzip2-2.5
+		./configure
+		make check
+		sudo make install
+		cd ..
+	fi;
+fi;
+
+
 #REDHAT
 if [ "$LINUX_ID" = "rhel" ]; then 
 	sudo yum check-update
