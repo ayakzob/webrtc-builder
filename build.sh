@@ -89,6 +89,7 @@ if [ "$LINUX_ID" = "sles" ]; then
 		./configure
 		make
 		sudo make install
+		cd ..
 	fi
 fi;
 
