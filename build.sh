@@ -1,3 +1,6 @@
+#ask for sudo password
+sudo pwd
+
 LINUX_ID=`cat /etc/os-release | egrep -i -o "^ID=(.*)" | egrep -io "[a-z]*" | grep -v ID`
 LINUX_ID_LIKE=`cat /etc/os-release | egrep -i -o "^ID_LIKE=(.*)" | egrep -io "[a-z]*" | egrep -v '(ID|LIKE)'`
 LINUX_VERSION_ID=`cat /etc/os-release | egrep -i -o "^VERSION_ID=(.*)" | egrep -io "[0-9\.]*"`
