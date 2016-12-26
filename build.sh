@@ -102,21 +102,22 @@ if [ "$LINUX_ID" = "sles" ]; then
 		echo "python2.7 exists"
 	else
 		#update ca certificates (https://github.com/openSUSE/ca-certificates)
-		git clone https://github.com/openSUSE/ca-certificates.git
-		cd ca-certificates
-		sudo make install
-		cd ..
+		#git clone https://github.com/openSUSE/ca-certificates.git
+		#cd ca-certificates
+		#sudo make install
+		#cd ..
 		
 		echo "Installing python 2.7"
 		sudo zypper --non-interactive install gcc gcc-c++
 		sudo zypper --non-interactive install openssl-devel
 
 		#this repo is for SUSE 11 only
-		sudo zypper --non-interactive addrepo http://download.opensuse.org/repositories/devel:/tools:/scm:/svn:/1.8/SLE_11_SP4/devel:tools:scm:svn:1.8.repo
+		#sudo zypper --non-interactive addrepo http://download.opensuse.org/repositories/devel:/tools:/scm:/svn:/1.8/SLE_11_SP4/devel:tools:scm:svn:1.8.repo
 		
-		wget http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
-		tar xvfz Python-2.7.3.tgz # unzip
-		cd Python-2.7.3
+		#wget http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
+		wget https://www.python.org/ftp/python/2.7.13/Python-2.7.13.tgz
+		tar xvfz Python-2.7.13.tgz # unzip
+		cd Python-2.7.13
 		./configure
 		make
 		sudo make install
