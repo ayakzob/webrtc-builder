@@ -1,24 +1,42 @@
-#UPDATE REPOS
-sudo yum check-update
-sudo apt-get update
-
-#INSTALL GIT
-sudo apt-get -y install git 
-sudo yum -y install git
-
 LINUX_ID=`cat /etc/os-release | egrep -i -o "^ID=(.*)" | egrep -io "[a-z]*" | grep -v ID`
 LINUX_ID_LIKE=`cat /etc/os-release | egrep -i -o "^ID_LIKE=(.*)" | egrep -io "[a-z]*" | egrep -v '(ID|LIKE)'`
 LINUX_VERSION_ID=`cat /etc/os-release | egrep -i -o "^VERSION_ID=(.*)" | egrep -io "[0-9\.]*"`
+LINUX_MAJOR_VERSION_ID=`cat /etc/os-release | egrep -io "^VERSION_ID=.[0-9]*" | egrep -io "[0-9]*"`
+
 echo "LINUX_ID=$LINUX_ID"
 echo "LINUX_ID_LIKE=$LINUX_ID_LIKE"
 echo "LINUX_VERSION_ID=$LINUX_VERSION_ID"
+echo "LINUX_MAJOR_VERSION_ID=$LINUX_MAJOR_VERSION_ID"
 
-#Install lbzip2, RED HAT seems to need this
-#http://lbzip2.org/download
-if which lbzip2 >/dev/null; then
-	echo "lbzip2 exists (http://lbzip2.org/download)"
-else
-	if [ "$LINUX_ID" = "rhel" ]; then 
+
+#UBUNTU
+if [ "$LINUX_ID" = "ubuntu" ]; then 
+	sudo apt-get update
+	sudo apt-get -y install git lbzip2
+
+	#install , UBUNTU seems to need this
+	sudo apt-get install -y gtk2.0
+
+	#PYTHON2.7 
+	if which python2.7 >/dev/null; then
+		echo "python2.7 exists"
+	else
+		echo "Installing python 2.7"
+		sudo apt-get install -y python-minimal
+	fi
+fi;
+
+
+
+#REDHAT
+if [ "$LINUX_ID" = "rhel" ]; then 
+	sudo yum check-update
+	sudo yum -y install git
+
+	#LBZIP2
+	if which lbzip2 >/dev/null; then
+		echo "lbzip2 exists (http://lbzip2.org/download)"
+	else
 		echo "Installing lbzip2 (http://lbzip2.org/download)"
 		sudo yum -y  groupinstall 'Development Tools'
 		curl -O http://archive.lbzip2.org/lbzip2-2.5.tar.gz
@@ -28,24 +46,52 @@ else
 		make check
 		sudo make install
 		cd ..
-	else
-		echo "Missing lbzip2 (http://lbzip2.org/download)"
 	fi;
-fi
+fi;
 
 
-#install gtk2.0, UBUNTU seems to need this
-if [ "$LINUX_ID" = "ubuntu" ]; then 
-	sudo apt-get install -y gtk2.0
 
-	#Install python27, Ubuntu 16 seems to need this
+
+#SUSE 
+if [ "$LINUX_ID" = "sles" ]; then 
+	#UPDATE REPOS
+	sudo zypper --non-interactive refresh 
+	sudo zypper --non-interactive install git
+
+	#LBZIP2
+	if which lbzip2 >/dev/null; then
+		echo "lbzip2 exists (http://lbzip2.org/download)"
+	else
+		echo "Installing lbzip2 (http://lbzip2.org/download)"
+		sudo zypper --non-interactive install gcc gcc-c++
+		wget http://archive.lbzip2.org/lbzip2-2.5.tar.gz
+		tar -xvzf lbzip2-2.5.tar.gz
+		cd lbzip2-2.5
+		./configure
+		make check
+		sudo make install
+		cd ..
+	fi;
+
+	#PYTHON2.7
 	if which python2.7 >/dev/null; then
 		echo "python2.7 exists"
 	else
 		echo "Installing python 2.7"
-		sudo apt-get install -y python-minimal
+		sudo zypper --non-interactive install gcc gcc-c++
+
+		#this repo is for SUSE 11 only
+		sudo zypper --non-interactive addrepo http://download.opensuse.org/repositories/devel:/tools:/scm:/svn:/1.8/SLE_11_SP4/devel:tools:scm:svn:1.8.repo
+		
+		wget http://www.python.org/ftp/python/2.7.3/Python-2.7.3.tgz
+		tar xvfz Python-2.7.3.tgz # unzip
+		cd Python-2.7.3
+		./configure
+		make
+		sudo make install
 	fi
 fi;
+
 
 
 
