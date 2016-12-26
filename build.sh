@@ -79,6 +79,7 @@ if [ "$LINUX_ID" = "sles" ]; then
 	else
 		echo "Installing python 2.7"
 		sudo zypper --non-interactive install gcc gcc-c++
+		sudo zypper --non-interactive install openssl-devel
 
 		#this repo is for SUSE 11 only
 		sudo zypper --non-interactive addrepo http://download.opensuse.org/repositories/devel:/tools:/scm:/svn:/1.8/SLE_11_SP4/devel:tools:scm:svn:1.8.repo
