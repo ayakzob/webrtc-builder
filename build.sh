@@ -30,7 +30,7 @@ fi;
 
 
 
-#UBUNTU
+#AMAZON LINUX
 if [ "$LINUX_ID" = "amzn" ]; then 
 	sudo yum check-update
 	sudo yum -y install git
